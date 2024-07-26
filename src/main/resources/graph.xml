@@ -9,10 +9,10 @@
         <constructor-arg index="0" value="NEW"/>
         <constructor-arg index="1" value="PAYMENT_RECEIVED"/>
         <constructor-arg index="2">
-            <util:list id="emptyPreconditions" value-type="ru.yandex.demo.xml.Guard"/>
+            <util:list id="emptyPreconditions" value-type="ru.yandex.demo.common.Guard"/>
         </constructor-arg>
         <constructor-arg index="3">
-            <util:list id="emptyActions" value-type="ru.yandex.demo.xml.Action"/>
+            <util:list id="emptyActions" value-type="ru.yandex.demo.common.Action"/>
         </constructor-arg>
     </bean>
 
@@ -20,25 +20,25 @@
         <constructor-arg index="0" value="PAYMENT_RECEIVED"/>
         <constructor-arg index="1" value="RESTAURANT_PROCESSING"/>
         <constructor-arg index="2">
-            <util:list value-type="ru.yandex.demo.xml.Guard">
+            <util:list value-type="ru.yandex.demo.common.Guard">
                 <ref bean="requireRestaurantActorGuard"/>
             </util:list>
         </constructor-arg>
         <constructor-arg index="3">
-            <util:list value-type="ru.yandex.demo.xml.Action">
+            <util:list value-type="ru.yandex.demo.common.Action">
                 <ref bean="sendMealPreparingAction"/>
             </util:list>
         </constructor-arg>
     </bean>
 
-    <bean id="requireRestaurantActorGuard" class="ru.yandex.demo.xml.RequireRestaurantActorGuard"/>
-    <bean id="sendMealPreparingAction" class="ru.yandex.demo.xml.SendPushToUserAction">
+    <bean id="requireRestaurantActorGuard" class="ru.yandex.demo.common.RequireRestaurantActorGuard"/>
+    <bean id="sendMealPreparingAction" class="ru.yandex.demo.common.SendPushToUserAction">
         <constructor-arg index="0" value="YOU_MEAL_IS_PREPARING"/>
     </bean>
-    <bean id="sendDeliveryAction" class="ru.yandex.demo.xml.SendPushToUserAction">
+    <bean id="sendDeliveryAction" class="ru.yandex.demo.common.SendPushToUserAction">
         <constructor-arg index="0" value="COURIER_IN_DELIVERY"/>
     </bean>
-    <bean id="sendCancelledAction" class="ru.yandex.demo.xml.SendPushToUserAction">
+    <bean id="sendCancelledAction" class="ru.yandex.demo.common.SendPushToUserAction">
         <constructor-arg index="0" value="CANCELLED"/>
     </bean>
 
@@ -46,44 +46,44 @@
         <constructor-arg index="0" value="RESTAURANT_PROCESSING"/>
         <constructor-arg index="1" value="COURIER_DELIVERY"/>
         <constructor-arg index="2">
-            <util:list value-type="ru.yandex.demo.xml.Guard">
+            <util:list value-type="ru.yandex.demo.common.Guard">
                 <ref bean="requireCourierPresentGuard"/>
             </util:list>
         </constructor-arg>
         <constructor-arg index="3">
-            <util:list value-type="ru.yandex.demo.xml.Action">
+            <util:list value-type="ru.yandex.demo.common.Action">
                 <ref bean="sendDeliveryAction"/>
             </util:list>
         </constructor-arg>
     </bean>
 
-    <bean id="requireCourierPresentGuard" class="ru.yandex.demo.xml.RequireRestaurantActorGuard"/>
+    <bean id="requireCourierPresentGuard" class="ru.yandex.demo.common.RequireRestaurantActorGuard"/>
 
     <bean id="deliveryToDeliveredEdge" class="ru.yandex.demo.xml.GraphEdge">
         <constructor-arg index="0" value="COURIER_DELIVERY"/>
         <constructor-arg index="1" value="DELIVERED"/>
         <constructor-arg index="2">
-            <util:list value-type="ru.yandex.demo.xml.Guard">
+            <util:list value-type="ru.yandex.demo.common.Guard">
                 <ref bean="requireCourierActorGuard"/>
             </util:list>
         </constructor-arg>
         <constructor-arg index="3">
-            <util:list value-type="ru.yandex.demo.xml.Action"/>
+            <util:list value-type="ru.yandex.demo.common.Action"/>
         </constructor-arg>
     </bean>
 
-    <bean id="requireCourierActorGuard" class="ru.yandex.demo.xml.RequireCourierActorGuard"/>
+    <bean id="requireCourierActorGuard" class="ru.yandex.demo.common.RequireCourierActorGuard"/>
 
     <bean id="restarauntCancelledEdge" class="ru.yandex.demo.xml.GraphEdge">
         <constructor-arg index="0" value="RESTAURANT_PROCESSING"/>
         <constructor-arg index="1" value="CANCELLED"/>
         <constructor-arg index="2">
-            <util:list value-type="ru.yandex.demo.xml.Guard">
+            <util:list value-type="ru.yandex.demo.common.Guard">
                 <ref bean="requireRestaurantActorGuard"/>
             </util:list>
         </constructor-arg>
         <constructor-arg index="3">
-            <util:list value-type="ru.yandex.demo.xml.Action">
+            <util:list value-type="ru.yandex.demo.common.Action">
                 <ref bean="sendCancelledAction"/>
             </util:list>
         </constructor-arg>

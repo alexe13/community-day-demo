@@ -5,4 +5,4 @@ import org.springframework.context.annotation.ImportResource
 
 @Configuration
 @ImportResource("graph.xml")
-class Configuration
+class XmlConfiguration

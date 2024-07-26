@@ -16,5 +16,6 @@ class FromWrapper(val fromStatus: Status) {
 }
 
 fun test() {
-    transition from NEW to CANCELLED
+    val t = transition from NEW to CANCELLED
+    println(t)
 }
