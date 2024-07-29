@@ -31,7 +31,7 @@ class XmlGraph {
             ?: throw TransitionNotAllowedException("No transition found ${event.order.status} -> ${event.newStatus}")
 
         for (guard in edge.guards) {
-            if (!guard.test(event)) {
+            if (!guard.check(event)) {
                 throw TransitionNotAllowedException("Transition not allowed")
             }
         }

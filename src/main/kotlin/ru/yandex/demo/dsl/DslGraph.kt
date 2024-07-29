@@ -17,7 +17,7 @@ class DslGraph(private val graph: ImmutableNetwork<Status, GraphEdgeContext>) {
         val edge = graph.edgeConnecting(from, to).orElseThrow()
 
         for (guard in edge.guards) {
-            if (!guard.test(event)) {
+            if (!guard.check(event)) {
                 throw TransitionNotAllowedException("Transition not allowed")
             }
         }

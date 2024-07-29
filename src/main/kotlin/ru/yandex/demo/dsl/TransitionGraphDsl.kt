@@ -50,7 +50,7 @@ data class GraphEdgeContext(
     val guards: MutableList<Guard> = mutableListOf(),
     val actions: MutableList<Action> = mutableListOf()
 ) {
-    fun guards(init: GuardsContext.() -> Unit) {
+    fun require(init: GuardsContext.() -> Unit) {
         val context = GuardsContext(guards)
         context.init()
     }

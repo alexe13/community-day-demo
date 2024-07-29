@@ -27,20 +27,16 @@
         <constructor-arg index="3">
             <util:list value-type="ru.yandex.demo.common.Action">
                 <ref bean="sendMealPreparingAction"/>
+                <ref bean="startCourierSearch"/>
             </util:list>
         </constructor-arg>
     </bean>
 
-    <bean id="requireRestaurantActorGuard" class="ru.yandex.demo.common.RequireRestaurantActorGuard"/>
-    <bean id="sendMealPreparingAction" class="ru.yandex.demo.common.SendPushToUserAction">
-        <constructor-arg index="0" value="YOU_MEAL_IS_PREPARING"/>
-    </bean>
-    <bean id="sendDeliveryAction" class="ru.yandex.demo.common.SendPushToUserAction">
-        <constructor-arg index="0" value="COURIER_IN_DELIVERY"/>
-    </bean>
-    <bean id="sendCancelledAction" class="ru.yandex.demo.common.SendPushToUserAction">
-        <constructor-arg index="0" value="CANCELLED"/>
-    </bean>
+    <bean id="requireRestaurantActorGuard" class="ru.yandex.demo.common.InitiatedByRestaurant"/>
+    <bean id="sendMealPreparingAction" class="ru.yandex.demo.common.NotifyMealPreparing"/>
+    <bean id="sendDeliveryAction" class="ru.yandex.demo.common.NotifyCourierDelivery"/>
+    <bean id="sendCancelledAction" class="ru.yandex.demo.common.NotifyOrderCancelled"/>
+    <bean id="startCourierSearch" class="ru.yandex.demo.common.StartCourierSearch"/>
 
     <bean id="restaurantProcessingToDeliveryEdge" class="ru.yandex.demo.xml.GraphEdge">
         <constructor-arg index="0" value="RESTAURANT_PROCESSING"/>
@@ -53,11 +49,13 @@
         <constructor-arg index="3">
             <util:list value-type="ru.yandex.demo.common.Action">
                 <ref bean="sendDeliveryAction"/>
+                <ref bean="showCourierTrack"/>
             </util:list>
         </constructor-arg>
     </bean>
 
-    <bean id="requireCourierPresentGuard" class="ru.yandex.demo.common.RequireRestaurantActorGuard"/>
+    <bean id="requireCourierPresentGuard" class="ru.yandex.demo.common.InitiatedByRestaurant"/>
+    <bean id="showCourierTrack" class="ru.yandex.demo.common.ShowCourierTrack"/>
 
     <bean id="deliveryToDeliveredEdge" class="ru.yandex.demo.xml.GraphEdge">
         <constructor-arg index="0" value="COURIER_DELIVERY"/>
@@ -72,7 +70,7 @@
         </constructor-arg>
     </bean>
 
-    <bean id="requireCourierActorGuard" class="ru.yandex.demo.common.RequireCourierActorGuard"/>
+    <bean id="requireCourierActorGuard" class="ru.yandex.demo.common.InitiatedByCourier"/>
 
     <bean id="restarauntCancelledEdge" class="ru.yandex.demo.xml.GraphEdge">
         <constructor-arg index="0" value="RESTAURANT_PROCESSING"/>
