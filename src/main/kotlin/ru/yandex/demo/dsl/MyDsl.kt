@@ -8,7 +8,7 @@ import ru.yandex.demo.common.Action
 import ru.yandex.demo.common.Guard
 
 @DslMarker
-annotation class TransitionGraphDsl
+annotation class MyDsl
 
 fun transitions(init: GraphContext.() -> Unit): DslGraph {
     val context = GraphContext()
@@ -16,11 +16,11 @@ fun transitions(init: GraphContext.() -> Unit): DslGraph {
     return context.build()
 }
 
-@TransitionGraphDsl
+@MyDsl
 @Suppress("UnstableApiUsage")
 class GraphContext {
 
-    internal val graph = NetworkBuilder
+    private val graph = NetworkBuilder
         .directed()
         .allowsSelfLoops(false)
         .allowsParallelEdges(false)
@@ -43,7 +43,7 @@ class GraphContext {
     }
 }
 
-@TransitionGraphDsl
+@MyDsl
 data class GraphEdgeContext(
     val from: Status,
     val to: Status,
@@ -61,7 +61,7 @@ data class GraphEdgeContext(
     }
 }
 
-@TransitionGraphDsl
+@MyDsl
 class GuardsContext(private val guards: MutableList<Guard>) {
     operator fun Guard.unaryMinus() {
         guards += this
@@ -72,7 +72,7 @@ class GuardsContext(private val guards: MutableList<Guard>) {
     }
 }
 
-@TransitionGraphDsl
+@MyDsl
 class ActionsContext(private val actions: MutableList<Action>) {
     operator fun Action.unaryMinus() {
         actions += this

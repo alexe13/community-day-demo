@@ -26,30 +26,30 @@ class DslConfiguration {
         transition(NEW to PAYMENT_RECEIVED)
         transition(PAYMENT_RECEIVED to RESTAURANT_PROCESSING) {
             require {
-                -InitiatedByRestaurant
+                - InitiatedByRestaurant
             }
             actions {
-                -NotifyMealPreparing
-                -StartCourierSearch
+                - NotifyMealPreparing
+                - StartCourierSearch
             }
         }
         transition(RESTAURANT_PROCESSING to COURIER_DELIVERY) {
             require {
-                -CourierShouldBeAssigned
+                - CourierShouldBeAssigned
             }
             actions {
-                -NotifyCourierDelivery
-                -ShowCourierTrack
+                - NotifyCourierDelivery
+                - ShowCourierTrack
             }
         }
         transition(COURIER_DELIVERY to DELIVERED) {
             require {
-                -InitiatedByCourier
+                - InitiatedByCourier
             }
         }
         transitions(entries.minus(CANCELLED) to CANCELLED) {
             actions {
-                -NotifyOrderCancelled
+                - NotifyOrderCancelled
             }
         }
     }
